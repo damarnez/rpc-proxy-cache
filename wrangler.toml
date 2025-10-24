@@ -1,0 +1,57 @@
+name = "rpc-proxy-cache"
+main = "build/worker/shim.mjs"
+compatibility_date = "2024-01-01"
+workers_dev = true
+
+[build]
+command = "cargo install -q worker-build && worker-build --release"
+
+# Default environment variables for development
+[vars]
+# Default RPC upstream URL (can be overridden)
+UPSTREAM_RPC_URL = ""
+# Default block distance for caching logs (blocks from tip)
+DEFAULT_BLOCK_DISTANCE = "100"
+# Per-chain block distance configuration (JSON format)
+# Example: {"1": 100, "137": 200, "56": 150}
+CHAIN_BLOCK_DISTANCES = "{}"
+
+# R2 bucket binding for eth_getLogs storage
+[[r2_buckets]]
+binding = "LOGS_CACHE"
+bucket_name = "rpc-logs-cache"
+preview_bucket_name = "rpc-logs-cache-dev"
+
+# KV namespace binding for eth_getBlockByNumber storage
+[[kv_namespaces]]
+binding = "BLOCKS_CACHE"
+id = ""
+
+# Production environment
+[env.production]
+
+# R2 bucket binding for production
+[[env.production.r2_buckets]]
+binding = "LOGS_CACHE"
+bucket_name = "rpc-logs-cache"
+
+# KV namespace binding for production
+[[env.production.kv_namespaces]]
+binding = "BLOCKS_CACHE"
+id = ""
+
+[env.production.vars]
+# Default RPC upstream URL (can be overridden)
+UPSTREAM_RPC_URL = ""
+# Default block distance for caching logs (blocks from tip)
+DEFAULT_BLOCK_DISTANCE = "100"
+# Per-chain block distance configuration (JSON format)
+# Example: {"1": 100, "137": 200, "56": 150}
+CHAIN_BLOCK_DISTANCES = "{}"
+
+[observability]
+[observability.logs]
+enabled = false
+head_sampling_rate = 1
+invocation_logs = true
+persist = true

@@ -1,0 +1,14 @@
+# Example environment variables for local development
+# Copy this file to .dev.vars and fill in your values
+
+# Your upstream RPC endpoint URL
+UPSTREAM_RPC_URL=https://your-rpc-endpoint.example.com
+
+# Default block distance from tip before caching logs (in blocks)
+DEFAULT_BLOCK_DISTANCE=100
+
+# Per-chain block distance configuration (JSON format)
+# Format: {"chainId": blockDistance}
+# Example for multiple chains:
+CHAIN_BLOCK_DISTANCES={"1": 100, "137": 200, "56": 150}
+
