@@ -12,3 +12,7 @@ DEFAULT_BLOCK_DISTANCE=100
 # Example for multiple chains:
 CHAIN_BLOCK_DISTANCES={"1": 100, "137": 200, "56": 150}
 
+# Cloudflare API Token for bucket cleanup script (optional)
+# Create at: https://dash.cloudflare.com/profile/api-tokens
+# Required permissions: Account > R2 > Edit
+CLOUDFLARE_API_TOKEN=your-api-token-here
